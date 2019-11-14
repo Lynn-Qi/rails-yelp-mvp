@@ -9,7 +9,8 @@
 
 # # TODO: Write a seed to insert 100 posts in the database
 puts "Creating seeds..."
-# Restaurant.destroy_all
+Restaurant.destroy_all
+Review.destroy_all
 10.times do
   resto = Restaurant.create({
     name: Faker::Restaurant.name,
@@ -19,9 +20,12 @@ puts "Creating seeds..."
     # reviews: Faker::Restaurant.review
   })
 
-  2.times do
-      
-  end
+
+  review = Review.create({
+    content: Faker::Restaurant.review,
+    rating: [0..5].sample
+  })
+  review.restaurant = resto
 end
 
 puts "Seeding completed."
